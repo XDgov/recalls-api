@@ -1,0 +1,2 @@
+XML: https://www.saferproducts.gov/RestWebServices/Recall?RecallTitle=child&RecallDescription=metal
+JSON: http://www.saferproducts.gov/RestWebServices/Recall?format=json&RecallTitle=Child&RecallDescription=metal
