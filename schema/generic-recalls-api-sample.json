@@ -1,0 +1,76 @@
+{
+  "meta": {
+    "last_updated": "2014-08-01",
+    "results": {
+      "skip": 0,
+      "limit": 1,
+      "total": 1355
+    }
+  },
+  "results": [
+    {
+      "recallID": "8133",
+      "recallNumber": "17218",
+      "recallReason": "Cass-Clay Creamery is voluntarily recalling a number of ice cream products because they may contain undeclared soy (lecithin).",
+      "recallStatus": "OnGoing",
+      "recallDate": "2017-09-13T00:00:00",
+      "lastPublishDate": "2017-09-13T00:00:00",
+      "recallDescription": "This recall involves Room Essentials 4-drawer dressers sold in three colors. The dressers measure 41 7/8 inches tall by 31 Â½ inches wide by 15 11/16 inches deep. Model number 249-05-0103 (black), 249-05-0106 (espresso), or 249-05-0109 (maple) is printed on the productâ€™s packaging.",
+      "recallURL": "https://www.cpsc.gov/Recalls/2017/Target-Recalls-Room-Essentials-4-Drawer-Dressers",
+      "productQuantity": "About 175,000 (in addition, about 3,000 units were sold in Canada)",
+      "recallClassification": "Class II",
+      "recallVoluntaryMandated": "Voluntary: Firm Initiated",
+      "consumerContact":"Christmas Tree Shops toll-free at 888-287-3232 anytime or online at www.christmastreeshops.com and click on â€œProduct Recallsâ€� at the bottom of the page for more information.",
+      "products": [
+        {
+          "upcs": [
+            "342352432"
+          ],
+          "name": "Room Essentials 4-drawer dressers",
+          "description": "Cass-Clay   , Swiss Chip, 3 Gallon(11.34 L).",
+          "model": null,
+          "type": null,
+          "CategoryID": null,
+          "images": [
+            "https://www.cpsc.gov/s3fs-public/Room Essentials 4 Drawer Dresser Black.JPG",
+            "https://www.cpsc.gov/s3fs-public/Room Essentials 4 Drawer Dresser Espresso.JPG"
+          ]
+        }
+      ],
+      "reportedComplaints": [
+        "The firm has received 12 reports of dressers tipping or collapsing, including tipping over on two three-year-old children. No injuries have been reported."
+      ],
+      "manufacturers": [
+        {
+          "name": "foo",
+          "locations": [
+            {
+              "country": "Denmark"
+            },
+            {
+              "country": "US",
+              "state": "ND",
+              "city": "Fargo"
+            }
+          ]
+        }
+      ],
+      "hazards": [
+        {
+          "hazard": "The recalled dressers are unstable if they are not anchored to the wall, posing serious tip-over and entrapment hazards that can result in death or injuries to children.",
+          "hazardTypeID": null
+        }
+      ],
+      "remedies": [
+        "Consumers should immediately stop using the recalled dresser that is not properly anchored to the wall and place it into an area that children cannot access. Consumers should return the recalled dresser to any Target store for a full refund."
+      ],
+      "retailers": [
+        {
+          "name": "Target stores nationwide and online at Target.com from January 2013 through April 2016 for about $118.",
+          "companyID": null
+        }
+      ],
+
+    }
+  ]
+}

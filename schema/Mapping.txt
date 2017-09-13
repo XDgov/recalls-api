@@ -1,0 +1,30 @@
+recallID -> FDA:event_id, CPSC:RecallID
+recallNumber -> CPSC:RecallNumber
+recallReason -> CPSC:Title,FDA:reason_for_recall
+recallStatus -> FDA:status
+recallDate -> CPSC:RecallDate, FDA:recall_initiation_date
+lastPublishDate -> CPSC:LastPublishDate
+recallDescription -> CPSC: Description
+recallURL -> CPSC:URL
+productQuantity -> CPSC:Products:NumberOfUnits, FDA:product_quantity
+recallClassification -> FDA:classification
+recallVoluntaryMandated: FDA:voluntary_mandated
+consumerContact: CPSC:ConsumerContact
+productImages -> CPSC:Images
+reportedComplaints -> CPSC:Injuries
+manufacturers.name -> CPSC:Manufacturers, FDA:recalling_firm
+manufacturers.location.country -> CPSC:ManufacturerCountries.Country, FDA:country
+manufacturers.location.state -> FDA:state
+manufacturers.location.city -> FDA:city
+products.upcs -> CPSC:ProductUPCs
+products.name -> CPSC:Products.Name
+products.description ->CPSC.Products.Description, FDA:product_description
+products.model ->CPSC.Products.Model
+products.type ->CPSC.Products.Type, FDA:product_type
+products.categoryID ->CPSC.Prducts.CategoryID, FDA: # figure out what CPSC CategoryID is
+products.images -> CPSC.Images,
+hazards.hazard ->CPSC.Hazards.Name
+hazards.hazardTypeID -> CPSC.Hazards.HazardTypeID
+remedies -> CPSC.Remedies.Name
+retailers.name ->CPSC.Retailers.Name
+retailers.companyID ->CPSC.Retailers.CompanyID
