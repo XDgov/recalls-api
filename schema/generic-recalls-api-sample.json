@@ -17,7 +17,6 @@
       "lastPublishDate": "2017-09-13T00:00:00",
       "recallDescription": "This recall involves Room Essentials 4-drawer dressers sold in three colors. The dressers measure 41 7/8 inches tall by 31 Â½ inches wide by 15 11/16 inches deep. Model number 249-05-0103 (black), 249-05-0106 (espresso), or 249-05-0109 (maple) is printed on the productâ€™s packaging.",
       "recallURL": "https://www.cpsc.gov/Recalls/2017/Target-Recalls-Room-Essentials-4-Drawer-Dressers",
-      "productQuantity": "About 175,000 (in addition, about 3,000 units were sold in Canada)",
       "recallClassification": "Class II",
       "recallVoluntaryMandated": "Voluntary: Firm Initiated",
       "consumerContact":"Christmas Tree Shops toll-free at 888-287-3232 anytime or online at www.christmastreeshops.com and click on â€œProduct Recallsâ€� at the bottom of the page for more information.",
@@ -34,7 +33,8 @@
           "images": [
             "https://www.cpsc.gov/s3fs-public/Room Essentials 4 Drawer Dresser Black.JPG",
             "https://www.cpsc.gov/s3fs-public/Room Essentials 4 Drawer Dresser Espresso.JPG"
-          ]
+          ],
+          "productQuantity": "About 175,000 (in addition, about 3,000 units were sold in Canada)"
         }
       ],
       "reportedComplaints": [

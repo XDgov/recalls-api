@@ -1,6 +1,7 @@
 package recallsapi2.ingester.dto.cpsc;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -25,7 +26,7 @@ public class CPSCRecallsItem {
     @JsonProperty("ConsumerContact")
     private String ConsumerContact;
     @JsonProperty("LastPublishDate")
-    private String LastPublishDate;
+    private Date LastPublishDate;
     @JsonProperty("Products")
     private List<CPSCRecallsItem.CPSCRecallProduct> Products;
     @JsonProperty("Inconjunctions")
@@ -46,6 +47,22 @@ public class CPSCRecallsItem {
     private List<CPSCRecallsItem.Remedy> Remedies;
     @JsonProperty("Retailers")
     private List<CPSCRecallsItem.Retailer> Retailers;
+
+    public List<String> unwindInjuries() {
+        List<String> unwoundInjuries = new ArrayList<>();
+        for (Injury injury : Injuries) {
+            unwoundInjuries.add(injury.getName());
+        }
+        return unwoundInjuries;
+    }
+
+    public List<String> unwindRemedies() {
+        List<String> unwoundRemedies = new ArrayList<>();
+        for (Remedy remedy : Remedies) {
+            unwoundRemedies.add(remedy.getName());
+        }
+        return unwoundRemedies;
+    }
 
     public static class CPSCRecallProduct {
 
@@ -241,7 +258,20 @@ public class CPSCRecallsItem {
         }
 
     }
-
+    public List<String> unwindProductUPCs( ){
+        List<String> unwoundProductUPCs = new ArrayList<>();
+        for( ProductUPC productUPC: ProductUPCs ){
+            unwoundProductUPCs.add(productUPC.getUPC());
+        }
+        return unwoundProductUPCs;
+    }
+    public List<String> unwindImages( ){
+        List<String> unwoundImages = new ArrayList<>();
+        for( Image image: Images ){
+            unwoundImages.add(image.getURL());
+        }
+        return unwoundImages;
+    }
     public static class ProductUPC {
 
         @JsonProperty("UPC")
@@ -395,11 +425,11 @@ public class CPSCRecallsItem {
         this.ConsumerContact = ConsumerContact;
     }
 
-    public String getLastPublishDate() {
+    public Date getLastPublishDate() {
         return LastPublishDate;
     }
 
-    public void setLastPublishDate(String LastPublishDate) {
+    public void setLastPublishDate(Date LastPublishDate) {
         this.LastPublishDate = LastPublishDate;
     }
 

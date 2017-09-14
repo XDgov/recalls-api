@@ -6,7 +6,6 @@ recallDate -> CPSC:RecallDate, FDA:recall_initiation_date
 lastPublishDate -> CPSC:LastPublishDate
 recallDescription -> CPSC: Description
 recallURL -> CPSC:URL
-productQuantity -> CPSC:Products:NumberOfUnits, FDA:product_quantity
 recallClassification -> FDA:classification
 recallVoluntaryMandated: FDA:voluntary_mandated
 consumerContact: CPSC:ConsumerContact
@@ -23,6 +22,7 @@ products.model ->CPSC.Products.Model
 products.type ->CPSC.Products.Type, FDA:product_type
 products.categoryID ->CPSC.Prducts.CategoryID, FDA: # figure out what CPSC CategoryID is
 products.images -> CPSC.Images,
+products.productQuantity -> CPSC:Products:NumberOfUnits, FDA:product_quantity
 hazards.hazard ->CPSC.Hazards.Name
 hazards.hazardTypeID -> CPSC.Hazards.HazardTypeID
 remedies -> CPSC.Remedies.Name

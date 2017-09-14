@@ -7,7 +7,6 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -17,13 +16,16 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import org.apache.log4j.Logger;
+import org.quartz.Job;
+import org.quartz.JobExecutionContext;
+import org.quartz.JobExecutionException;
 import recallsapi2.ingester.dto.cpsc.CPSCRecallsItem;
 
 /**
  *
  * @author ferru001
  */
-public class CPSCIngester {
+public class CPSCIngester implements IIngester {
 
     private static final Logger logger = Logger.getLogger(CPSCIngester.class);
     private static final String DATE_FMR = "yyyy-MM-dd";
@@ -31,7 +33,8 @@ public class CPSCIngester {
     private static final DateFormat DATE_FORMATTER = new SimpleDateFormat(DATE_FMR);
     private static final DateFormat TIME_FORMATTER = new SimpleDateFormat(TIME_FMR);
 
-    public void ingestData() {
+    @Override
+    public void execute(JobExecutionContext jec) throws JobExecutionException {
         try {
             Date lastIngestDateTime = DATE_FORMATTER.parse("1800-01-01");
             logger.info("lastIngestDateTime: " + lastIngestDateTime);
@@ -60,14 +63,14 @@ public class CPSCIngester {
                 });
 
                 logger.info("CPSCRecallItems.size(): " + cpscRecallItems.size());
-            } catch (MalformedURLException ex) {
-                logger.error(ex.getMessage(), ex);
             } catch (IOException ex) {
                 logger.error(ex.getMessage(), ex);
+                throw new JobExecutionException(ex.getMessage(), ex);
             }
 
         } catch (ParseException ex) {
             logger.error(ex.getMessage(), ex);
         }
     }
+
 }
