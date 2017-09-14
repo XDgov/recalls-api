@@ -1,13 +1,12 @@
 package recallsapi2.ingester.dao;
 
 import com.jolbox.bonecp.BoneCP;
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
 import org.apache.log4j.Logger;
-import recallsapi2.dto.JobControl;
+import recallsapi2.generic.JobControl;
 import recallsapi2.ingester.dto.cpsc.CPSCRecallsItem;
 import recallsapi2.recallsglobals.BasicJdbcSupport;
 import recallsapi2.recallsglobals.GlobalDataAccess;
@@ -21,7 +20,7 @@ public class CPSCIngesterDAO extends GlobalDataAccess {
 
     private static final Logger logger = Logger.getLogger(CPSCIngesterDAO.class);
 
-    public CPSCIngesterDAO(BoneCP connectionPool) throws IOException, SQLException {
+    public CPSCIngesterDAO(BoneCP connectionPool) {
         super(connectionPool);
     }
 
@@ -58,8 +57,8 @@ public class CPSCIngesterDAO extends GlobalDataAccess {
                 recallsPStmt.setString(11, null);//RECALL_CLASSIFICATION
                 recallsPStmt.setString(12, null);//RECALL_VOLUNTARY_MANDATED
                 recallsPStmt.setString(13, currRecallItem.getConsumerContact());//CONSUMER_CONTACT
-                recallsPStmt.setString(14, GeneralUtils.concat(currRecallItem.unwindInjuries(), ">::<"));//REPORTED_COMPLAINTS
-                recallsPStmt.setString(15, GeneralUtils.concat(currRecallItem.unwindRemedies(), ">::<"));//REMEDIES
+                recallsPStmt.setString(14, currRecallItem.getInjuries().isEmpty()?"":GeneralUtils.concat(currRecallItem.unwindInjuries(), ">::<"));//REPORTED_COMPLAINTS
+                recallsPStmt.setString(15, currRecallItem.getRemedies().isEmpty()?"":GeneralUtils.concat(currRecallItem.unwindRemedies(), ">::<"));//REMEDIES
                 int insertedRec = recallsPStmt.executeUpdate();
                 if (insertedRec != 1) {
                     String errMsg = String.format("Failure to insert RECALLS item, inserted %d, but expected to insert 1", insertedRec);
@@ -70,15 +69,14 @@ public class CPSCIngesterDAO extends GlobalDataAccess {
                 productsPStmt = conn.prepareStatement(INSERT_PRODUCTS_SQL);
                 //we inserted the RECALLS record successfully - let's move on to the PRODUCTS
                 for (CPSCRecallsItem.CPSCRecallProduct product : currRecallItem.getProducts()) {
-//                    RECALLS_ID,UPCS,NAME,DESCRIPTION,MODEL,TYPE,CATEGORY_ID,IMAGES,PRODUCT_QUANTITY
                     productsPStmt.setString(1, jc.getpKeyPrefix() + "-" + (currMaxPKeyVal));//RECALLS_ID
-                    productsPStmt.setString(2, GeneralUtils.concat(currRecallItem.unwindProductUPCs(), ">::<"));//UPCS
+                    productsPStmt.setString(2, currRecallItem.getProductUPCs().isEmpty()?null:GeneralUtils.concat(currRecallItem.unwindProductUPCs(), ">::<"));//UPCS
                     productsPStmt.setString(3, product.getName());//NAME
                     productsPStmt.setString(4, product.getDescription());//DESCRIPTION
                     productsPStmt.setString(5, product.getModel());//MODEL
                     productsPStmt.setString(6, product.getType());//TYPE
                     productsPStmt.setString(7, product.getCategoryID());//CATEGORY_ID
-                    productsPStmt.setString(8, GeneralUtils.concat(currRecallItem.unwindImages(), ">::<"));//IMAGES
+                    productsPStmt.setString(8, currRecallItem.getImages().isEmpty()?null:GeneralUtils.concat(currRecallItem.unwindImages(), ">::<"));//IMAGES
                     productsPStmt.setString(9, product.getNumberOfUnits());//PRODUCT_QUANTITY
                     insertedRec = productsPStmt.executeUpdate();
                     if (insertedRec != 1) {
@@ -116,6 +114,7 @@ public class CPSCIngesterDAO extends GlobalDataAccess {
                             throw new SQLException(errMsg);
                         }
                     }
+                    jc.setMaxManufacturerPkeyValue(jc.getMaxManufacturerPkeyValue()+1);
                 }
 
                 hazardsPStmt = conn.prepareStatement(INSERT_HAZARDS_SQL);

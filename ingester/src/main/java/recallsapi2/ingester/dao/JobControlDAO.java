@@ -1,5 +1,6 @@
 package recallsapi2.ingester.dao;
 
+import com.jolbox.bonecp.BoneCP;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -8,7 +9,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import org.apache.log4j.Logger;
-import recallsapi2.dto.JobControl;
+import recallsapi2.generic.JobControl;
 import recallsapi2.recallsglobals.GlobalDataAccess;
 
 /**
@@ -23,9 +24,13 @@ public class JobControlDAO extends GlobalDataAccess {
         super(propertyFileName);
     }
 
+    public JobControlDAO(BoneCP connectionPool) {
+        super(connectionPool);
+    }
+
     public List<JobControl> getJobControls(boolean getOnlyActive) {
         List<JobControl> jobControlList = new ArrayList<>();
-        String sql = "SELECT * FROM JOB_CONTROL" + (getOnlyActive ? " WHERE ACTIVE=TRUE" : "");
+        String sql = "SELECT * FROM JOBS_CONTROL" + (getOnlyActive ? " WHERE ACTIVE=TRUE" : "");
         Connection conn = null;
         PreparedStatement pStmt = null;
         ResultSet rs = null;
@@ -34,7 +39,7 @@ public class JobControlDAO extends GlobalDataAccess {
             conn = getConn();
             pStmt = conn.prepareStatement(sql);
             rs = pStmt.executeQuery();
-            while( rs.next() ){
+            while (rs.next()) {
                 jobControlList.add(getJobControl(rs));
             }
         } catch (SQLException ex) {
@@ -49,9 +54,9 @@ public class JobControlDAO extends GlobalDataAccess {
         JobControl jc = new JobControl();
         jc.setId(rs.getInt("ID"));
         jc.setActive(rs.getBoolean("ACTIVE"));
-        jc.setLastIngestDatetime(rs.getDate("LAST_INGEST_DATETIME"));
+        jc.setLastIngestDatetime(rs.getDate("LAST_EXECUTE_DATETIME"));
         jc.setLoadFrequency(rs.getInt("LOAD_FREQUENCY"));
-        jc.setProviderName(rs.getString("PROVIDER_NAME"));
+        jc.setOrganizationName(rs.getString("ORGANIZATION_NAME"));
         jc.setResultsFormat(rs.getString("RESULTS_FORMAT"));
         jc.setRootUrl(rs.getString("ROOT_URL"));
         jc.setUrlParams(rs.getString("URL_PARAMS"));

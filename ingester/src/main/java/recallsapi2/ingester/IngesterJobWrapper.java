@@ -4,7 +4,7 @@ import org.apache.log4j.Logger;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
-import recallsapi2.dto.JobControl;
+import recallsapi2.generic.JobControl;
 
 /**
  *

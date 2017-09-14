@@ -1,4 +1,4 @@
-package recallsapi2.dto;
+package recallsapi2.generic;
 
 import java.util.Date;
 
@@ -9,7 +9,7 @@ import java.util.Date;
 public class JobControl {
 
     private int id;
-    private String providerName;
+    private String organizationName;
     private String iIngesterDefinitionName;
     private String resultsFormat;
     private int loadFrequency;
@@ -28,7 +28,7 @@ public class JobControl {
             String pKeyPrefix,
             int maxPKeyValue, int maxManufacturerPkeyValue) {
         this.id = id;
-        this.providerName = providerName;
+        this.organizationName = providerName;
         this.iIngesterDefinitionName = iIngesterDefinitionName;
         this.resultsFormat = resultsFormat;
         this.loadFrequency = loadFrequency;
@@ -49,12 +49,12 @@ public class JobControl {
         this.id = id;
     }
 
-    public String getProviderName() {
-        return providerName;
+    public String getOrganizationName() {
+        return organizationName;
     }
 
-    public void setProviderName(String providerName) {
-        this.providerName = providerName;
+    public void setOrganizationName(String organizationName) {
+        this.organizationName = organizationName;
     }
 
     public String getiIngesterDefinitionName() {
